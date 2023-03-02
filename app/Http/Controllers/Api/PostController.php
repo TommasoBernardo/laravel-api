@@ -11,7 +11,7 @@ class PostController extends Controller
     //
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::with('technologies')->paginate(10);
         return response()->json([
             'succes' => true,
             'results' => $posts
@@ -20,6 +20,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $post = Post::findOrFail($post->id)->with('tecnhologies');
         return response()->json([
             'succes' => true,
             'results' => $post
