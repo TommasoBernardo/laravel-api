@@ -30,7 +30,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('date', 'DESC')->paginate(15);
+        if (Auth::user()->roles()->pluck('id')->contains(1) || Auth::user()->roles()->pluck('id')->contains(2)) {
+            $posts = Post::orderBy('date', 'DESC')->paginate(15);
+        } else {
+            $posts = Post::where('user_id', Auth::user()->id)->orderby('post_date', 'DESC')->paginate(15);
+        }
         return view('admin.posts.index', compact('posts'));
     }
 
