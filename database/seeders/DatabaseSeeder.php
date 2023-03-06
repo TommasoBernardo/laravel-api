@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             TechnologySeeder::class,
             RoleSeeder::class,
+            RoleUserSeeder::class,
             PostSeeder::class,
             PostTechnologySeeder::class,
 
